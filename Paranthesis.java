@@ -30,7 +30,9 @@ class Paranthesis
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter no. of brackets:");
 		int n=sc.nextInt();
-		if(n%2==1) //As we can't form balanced string with odd bracket count
+		if(n<0) //Can't enter negative
+			System.out.println("Invalid");
+		else if(n%2==1) //As we can't form balanced string with odd bracket count
 			System.out.println("Can't balance!");
 		else
 		{char[] s=new char[n];
@@ -40,3 +42,25 @@ class Paranthesis
 		sc.close();
 		}	
 }
+
+/*
+Test Cases:
+1. 2
+()
+
+2. 6
+((()))
+(()())
+(())()
+()(())
+()()()
+
+3. 3
+Can't balance!
+
+4. 0
+
+5. -1
+Invalid!
+
+ */ 
