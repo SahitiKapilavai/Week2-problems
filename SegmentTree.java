@@ -38,14 +38,14 @@ class SegmentTree
         return getSum(ss, mid, qs, qe, 2 * si + 1) + getSum(mid + 1, se, qs, qe, 2 * si + 2); 
     } 
     
-    void updateAST(int arr[], int n, int i, int new_val) 
+    void updateAST(int arr[], int n, int i, int new_val) //parameters:input array,size of input array,position,new value
     { 
         int diff = new_val - arr[i]; 
         arr[i] = new_val; //Update Input Array
         updateST(0, n - 1, i, diff, 0); //Update Segment Tree
     } 
     
-    void updateST(int ss, int se, int i, int diff, int si) ////parameters:segment start&end,position, difference,current index of segment
+    void updateST(int ss, int se, int i, int diff, int si) //parameters:segment start&end,position, difference,current index of segment
     { 
         if (i < ss || i > se) //position lies outside segment
             return; 
