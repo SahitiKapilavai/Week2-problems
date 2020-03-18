@@ -16,7 +16,7 @@ class SegmentTree
     } 
     
     int build(int arr[], int ss, int se, int si) //parameters:input array, segment start & end,current index of segment
-    { //If segment size is 1 i.e leaf node
+    { //If segment size is 1 (i.e leaf node)
         if (ss == se) { 
             st[si] = arr[ss]; 
             return arr[ss]; 
@@ -40,6 +40,8 @@ class SegmentTree
     
     void updateAST(int arr[], int n, int i, int new_val) //parameters:input array,size of input array,position,new value
     { 
+        if(i<0 ||i>=n)
+            System.out.println("Invalid position!");
         int diff = new_val - arr[i]; 
         arr[i] = new_val; //Update Input Array
         updateST(0, n - 1, i, diff, 0); //Update Segment Tree
@@ -72,10 +74,43 @@ class SegmentTree
         int qe=sc.nextInt();
         System.out.println("Sum of values in given range = " + tree.getSum(0, n - 1, qs, qe, 0)); 
         System.out.println("Enter position and value to update:");
-        int p=sc.nextInt();
-        int v=sc.nextInt();
-        tree.updateAST(arr, n, p, v); //Updates given array and segment tree
+        int pos=sc.nextInt();
+        int val=sc.nextInt();
+        tree.updateAST(arr, n, pos, val); //Updates given array and segment tree
         System.out.println("Updated sum of values in given range = " + tree.getSum(0, n - 1, qs, qe, 0)); 
         sc.close();
     } 
 } 
+
+/*
+Test Cases:
+1.arr[]=1 3 5 7 9
+    qs=1 qe=3
+    SumInRange=15
+    pos=2 val=6
+    Updated SumInRange=16
+    
+ 2.arr[]=1
+    qs=0 qe=0
+    SumInRange=1
+    pos=0 val=6
+    Updated SumInRange=6
+    
+ 3.arr[]=-1 -2 -3 -4 -5
+    qs=3 qe=4
+    SumInRange=-9
+    pos=3 val=100
+    Updated SumInRange=95
+    
+ 4.arr[]=1 3 5 7 9
+    qs=5 qe=6
+    SumInRange=0
+    pos=2 val=6
+    Updated SumInRange=0
+  
+ 5.arr[]=1 3 5 7 9
+    qs=1 qe=3
+    SumInRange=15
+    pos=5 val=10
+    Invalid Position!
+    
